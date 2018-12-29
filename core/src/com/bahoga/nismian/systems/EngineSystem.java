@@ -1,24 +1,22 @@
 package com.bahoga.nismian.systems;
 
 import com.badlogic.ashley.core.*;
-import com.badlogic.ashley.utils.ImmutableArray;
 
 import java.util.function.Consumer;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class EngineSystem extends EntitySystem {
 
     private Engine engine;
 
-    ImmutableArray<Entity> getAll(final Class<? extends Component>... components) {
+    Stream<Entity> searchWith(final Class<? extends Component>... components) {
         Family all = Family.all(components).get();
-        return engine.getEntitiesFor(all);
+        return StreamSupport.stream(engine.getEntitiesFor(all).spliterator(), false);
     }
 
     void applyToAll(final Consumer<Entity> function, final Class<? extends Component>... components) {
-        ImmutableArray<Entity> all = getAll(components);
-        for (Entity en : all) {
-            function.accept(en);
-        }
+        searchWith(components).forEach(function);
     }
 
     @Override
