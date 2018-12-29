@@ -1,6 +1,5 @@
 package com.bahoga.nismian.systems;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.bahoga.nismian.Mappers;
 import com.bahoga.nismian.components.CameraComponent;
@@ -18,12 +17,12 @@ public class CameraSystem extends EngineSystem {
 
     @Override
     public void update(float deltaTime) {
-        for (Entity entity : getAll(Player.class, Position.class)) {
+        applyToAll(entity -> {
             final Position position = Mappers.position.get(entity);
             final OrthographicCamera cam = cameraComponent.orthographicCamera;
             cam.position.x = position.x;
             cam.position.y = position.y;
             cam.update();
-        }
+        }, Player.class, Position.class);
     }
 }

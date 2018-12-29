@@ -9,7 +9,7 @@ public class MapRenderSystem extends EngineSystem {
 
     @Override
     public void update(final float deltaTime) {
-        doApply(map -> doApply(camera -> {
+        applyToAll(map -> applyToAll(camera -> {
             MapComponent mapComponent = Mappers.map.get(map);
             CameraComponent cameraComponent = Mappers.camera.get(camera);
             mapComponent.mapRenderer.setView(cameraComponent.orthographicCamera);

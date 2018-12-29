@@ -1,6 +1,5 @@
 package com.bahoga.nismian.systems;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.bahoga.nismian.components.Player;
@@ -10,8 +9,7 @@ public class InputSystem extends EngineSystem {
 
     @Override
     public void update(float deltaTime) {
-        for (Entity entity : getAll(Player.class, Velocity.class)) {
-
+        applyToAll(entity -> {
             entity.remove(Velocity.class);
 
             float x, y = x = 0;
@@ -29,6 +27,7 @@ public class InputSystem extends EngineSystem {
             }
 
             entity.add(new Velocity(x, y));
-        }
+
+        }, Player.class, Velocity.class);
     }
 }

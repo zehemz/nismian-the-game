@@ -14,7 +14,7 @@ public class EngineSystem extends EntitySystem {
         return engine.getEntitiesFor(all);
     }
 
-    void doApply(final Consumer<Entity> function, final Class<? extends Component>... components) {
+    void applyToAll(final Consumer<Entity> function, final Class<? extends Component>... components) {
         ImmutableArray<Entity> all = getAll(components);
         for (Entity en : all) {
             function.accept(en);
