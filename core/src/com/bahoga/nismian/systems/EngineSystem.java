@@ -5,14 +5,16 @@ import com.badlogic.ashley.utils.ImmutableArray;
 
 public class EngineSystem extends EntitySystem {
 
-    protected final Engine engine;
-
-    public EngineSystem(final Engine engine) {
-        this.engine = engine;
-    }
+    protected Engine engine;
 
     protected ImmutableArray<Entity> getAll(Class<? extends Component>... components) {
         Family all = Family.all(components).get();
         return engine.getEntitiesFor(all);
+    }
+
+    @Override
+    public void addedToEngine(Engine engine) {
+        this.engine = engine;
+        super.addedToEngine(engine);
     }
 }

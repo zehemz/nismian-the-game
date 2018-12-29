@@ -1,7 +1,6 @@
 package com.bahoga.nismian.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -22,11 +21,10 @@ public class GameSprite extends Component {
         }
     }
 
-    public void render(Position position) {
+    public void render(CameraComponent cameraComponent) {
         shapeRenderer.begin(Filled);
         shapeRenderer.setColor(Color.BLUE);
-        Gdx.app.log("POS", position.toString());
-        shapeRenderer.circle(position.x, position.y, 100);
+        shapeRenderer.circle(cameraComponent.orthographicCamera.viewportWidth / 2f, cameraComponent.orthographicCamera.viewportHeight / 2f, 100);
         shapeRenderer.end();
     }
 }
