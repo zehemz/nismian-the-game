@@ -3,20 +3,19 @@ package com.bahoga.nismian;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bahoga.nismian.components.CameraComponent;
 import com.bahoga.nismian.entities.EntityFactory;
+import com.bahoga.nismian.entities.EntityFactory.GameEntity;
+import com.bahoga.nismian.sceens.PlayScreen;
 import com.bahoga.nismian.systems.*;
 
-public class Game extends ApplicationAdapter {
-
-
+public class NismianGame extends Game
+{
     private Engine engine;
     private SpriteBatch batch;
+    private PlayScreen screen;
 
     @Override
     public void create() {
@@ -25,10 +24,10 @@ public class Game extends ApplicationAdapter {
 
         engine = new Engine();
 
-        engine.addEntity(EntityFactory.create(EntityFactory.GameEntity.MAP));
-        engine.addEntity(EntityFactory.create(EntityFactory.GameEntity.PLAYER));
+        engine.addEntity(EntityFactory.create(GameEntity.MAP));
+        engine.addEntity(EntityFactory.create(GameEntity.PLAYER));
 
-        Entity entity = EntityFactory.create(EntityFactory.GameEntity.CAMERA);
+        Entity entity = EntityFactory.create(GameEntity.CAMERA);
         final CameraComponent cameraComponent = Mappers.camera.get(entity);
         engine.addEntity(entity);
 
@@ -37,12 +36,9 @@ public class Game extends ApplicationAdapter {
         engine.addSystem(new CameraSystem(cameraComponent));
         engine.addSystem(new MapRenderSystem());
         engine.addSystem(new SpriteRenderSystem(cameraComponent, batch));
-    }
 
-    @Override
-    public void render() {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        engine.update(Gdx.graphics.getDeltaTime());
+        screen = new PlayScreen(batch, engine);
+        setScreen(screen);
     }
 
     @Override

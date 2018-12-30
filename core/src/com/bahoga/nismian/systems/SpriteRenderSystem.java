@@ -1,7 +1,9 @@
 package com.bahoga.nismian.systems;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.bahoga.nismian.Constants;
 import com.bahoga.nismian.Mappers;
 import com.bahoga.nismian.components.CameraComponent;
 import com.bahoga.nismian.components.GameSprite;
@@ -19,16 +21,16 @@ public class SpriteRenderSystem extends EngineSystem {
 
     @Override
     public void update(float deltaTime) {
+        batch.setProjectionMatrix(cameraComponent.cam.combined);
         batch.begin();
         withComponents(GameSprite.class, Position.class)
                 .forEach(entity -> {
                     final GameSprite gameSprite = Mappers.gameSprite.get(entity);
                     final Position position = Mappers.position.get(entity);
 
-                    Vector3 pos = cameraComponent.orthographicCamera
-                            .project(new Vector3(position.x, position.y, 0));
-
-                    gameSprite.sprite.setCenter(pos.x, pos.y);
+                    gameSprite.sprite.setCenter(position.x, position.y);
+                    gameSprite.sprite.setSize(Constants.PLAYER_WIDTH,
+                            Constants.PLAYER_HEIGHT);
                     gameSprite.sprite.draw(batch);
                 });
         batch.end();
