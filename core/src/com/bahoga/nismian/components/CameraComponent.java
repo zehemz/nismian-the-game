@@ -9,12 +9,19 @@ public class CameraComponent extends Component {
     public static final int VISIBLE_VIEWPORT_HEIGHT = 30;
     public final OrthographicCamera orthographicCamera;
 
-    public CameraComponent(float tailSize, float ratioHeight) {
-        orthographicCamera = new OrthographicCamera(VISIBLE_VIEWPORT_WIDTH * tailSize,
-                VISIBLE_VIEWPORT_HEIGHT * tailSize * ratioHeight);
+    private static final float TILE_SIZE = 32f;
 
-        orthographicCamera.position.set(orthographicCamera.viewportWidth / 2f, orthographicCamera.viewportHeight / 2f, 0);
+    public CameraComponent(float width, float height) {
+
+        orthographicCamera = new OrthographicCamera(VISIBLE_VIEWPORT_WIDTH * TILE_SIZE,
+                VISIBLE_VIEWPORT_HEIGHT * TILE_SIZE * (height/width));
+
         orthographicCamera.zoom = 1f;
-        orthographicCamera.update();
+    }
+
+    public void setViewportSize(float width, float height)
+    {
+        orthographicCamera.viewportWidth = VISIBLE_VIEWPORT_WIDTH * TILE_SIZE;
+        orthographicCamera.viewportHeight = VISIBLE_VIEWPORT_HEIGHT * TILE_SIZE * (height/width);
     }
 }
