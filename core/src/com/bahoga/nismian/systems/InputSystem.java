@@ -9,25 +9,26 @@ public class InputSystem extends EngineSystem {
 
     @Override
     public void update(float deltaTime) {
-        applyToAll(entity -> {
-            entity.remove(Velocity.class);
+        withComponents(Player.class, Velocity.class)
+                .forEach(entity -> {
+                    entity.remove(Velocity.class);
 
-            float x, y = x = 0;
-            if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                y -= 100f;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                y += 100f;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                x -= 100f;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                x += 100f;
-            }
+                    float x, y = x = 0;
+                    if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                        y -= 100f;
+                    }
+                    if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                        y += 100f;
+                    }
+                    if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                        x -= 100f;
+                    }
+                    if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                        x += 100f;
+                    }
 
-            entity.add(new Velocity(x, y));
+                    entity.add(new Velocity(x, y));
 
-        }, Player.class, Velocity.class);
+                });
     }
 }

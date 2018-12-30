@@ -17,12 +17,13 @@ public class CameraSystem extends EngineSystem {
 
     @Override
     public void update(float deltaTime) {
-        applyToAll(entity -> {
-            final Position position = Mappers.position.get(entity);
-            final OrthographicCamera cam = cameraComponent.orthographicCamera;
-            cam.position.x = position.x;
-            cam.position.y = position.y;
-            cam.update();
-        }, Player.class, Position.class);
+        withComponents(Player.class, Position.class)
+                .forEach(entity -> {
+                    final Position position = Mappers.position.get(entity);
+                    final OrthographicCamera cam = cameraComponent.orthographicCamera;
+                    cam.position.x = position.x;
+                    cam.position.y = position.y;
+                    cam.update();
+                });
     }
 }

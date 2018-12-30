@@ -8,11 +8,12 @@ public class MovementSystem extends EngineSystem {
 
     @Override
     public void update(float deltaTime) {
-        applyToAll(entity -> {
-            Position position = Mappers.position.get(entity);
-            Velocity velocity = Mappers.velocity.get(entity);
-            entity.remove(Position.class);
-            entity.add(new Position(position.x + velocity.x * deltaTime, position.y + velocity.y * deltaTime));
-        }, Position.class, Velocity.class);
+        withComponents(Position.class, Velocity.class)
+                .forEach(entity -> {
+                    Position position = Mappers.position.get(entity);
+                    Velocity velocity = Mappers.velocity.get(entity);
+                    entity.remove(Position.class);
+                    entity.add(new Position(position.x + velocity.x * deltaTime, position.y + velocity.y * deltaTime));
+                });
     }
 }

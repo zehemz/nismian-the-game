@@ -9,11 +9,15 @@ public class MapRenderSystem extends EngineSystem {
 
     @Override
     public void update(final float deltaTime) {
-        applyToAll(map -> applyToAll(camera -> {
-            MapComponent mapComponent = Mappers.map.get(map);
-            CameraComponent cameraComponent = Mappers.camera.get(camera);
-            mapComponent.mapRenderer.setView(cameraComponent.orthographicCamera);
-            mapComponent.mapRenderer.render();
-        }, CameraComponent.class), MapComponent.class);
+        withComponents(MapComponent.class)
+                .forEach(map ->
+                        withComponents(CameraComponent.class)
+                                .forEach(
+                                        camera -> {
+                                            MapComponent mapComponent = Mappers.map.get(map);
+                                            CameraComponent cameraComponent = Mappers.camera.get(camera);
+                                            mapComponent.mapRenderer.setView(cameraComponent.orthographicCamera);
+                                            mapComponent.mapRenderer.render();
+                                        }));
     }
 }

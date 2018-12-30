@@ -15,9 +15,10 @@ public class SpriteRenderSystem extends EngineSystem {
 
     @Override
     public void update(float deltaTime) {
-        applyToAll(entity -> {
-            final GameSprite gameSprite = Mappers.gameSprite.get(entity);
-            gameSprite.render(cameraComponent);
-        }, GameSprite.class, Position.class);
+        withComponents(GameSprite.class, Position.class)
+                .forEach(entity -> {
+                    final GameSprite gameSprite = Mappers.gameSprite.get(entity);
+                    gameSprite.render(cameraComponent);
+                });
     }
 }
