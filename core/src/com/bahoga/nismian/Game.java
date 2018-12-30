@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bahoga.nismian.components.CameraComponent;
@@ -33,6 +32,8 @@ public class Game extends ApplicationAdapter {
         engine.addEntity(entity);
 
         engine.addSystem(new InputSystem());
+        engine.addSystem(new ActionSystem());
+        engine.addSystem(new AnimationSystem());
         engine.addSystem(new MovementSystem());
         engine.addSystem(new CameraSystem(cameraComponent));
         engine.addSystem(new MapRenderSystem());
@@ -46,8 +47,7 @@ public class Game extends ApplicationAdapter {
     }
 
     @Override
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
         Family family = Family.all(CameraComponent.class).get();
         engine.getEntitiesFor(family).forEach(entity -> {
             Mappers.camera.get(entity).setViewportSize(width, height);
@@ -55,8 +55,7 @@ public class Game extends ApplicationAdapter {
     }
 
     @Override
-    public void dispose()
-    {
+    public void dispose() {
         batch.dispose();
     }
 }

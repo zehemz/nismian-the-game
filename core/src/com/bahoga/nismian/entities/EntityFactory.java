@@ -3,9 +3,8 @@ package com.bahoga.nismian.entities;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.bahoga.nismian.AnimationFactory;
 import com.bahoga.nismian.components.*;
 import com.bahoga.nismian.maps.MapFactory;
 
@@ -34,7 +33,9 @@ public class EntityFactory {
                 entity.add(new Velocity(0, 0));
                 entity.add(new Player());
                 entity.add(new Position(RELATIVE_WORLD_WIDTH / 2, RELATIVE_WORLD_HEIGHT / 2));
-                entity.add(new GameSprite(new Sprite(new Texture("badlogic.jpg"))));
+                entity.add(new BusyComponent(0f));
+                entity.add(AnimationFactory.getSkellByAction(ActionComponent.Action.IDLE));
+                entity.add(new ActionComponent(ActionComponent.Action.IDLE));
                 break;
             case CAMERA:
                 entity.add(new CameraComponent(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
