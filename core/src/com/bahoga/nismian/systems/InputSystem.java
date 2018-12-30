@@ -3,6 +3,7 @@ package com.bahoga.nismian.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.bahoga.nismian.Mappers;
 import com.bahoga.nismian.components.*;
 
 public class InputSystem extends EngineSystem {
@@ -13,6 +14,10 @@ public class InputSystem extends EngineSystem {
     }
 
     private void checkActions(final Entity entity) {
+
+        BusyComponent busyComponent = Mappers.busy.get(entity);
+        if (busyComponent.isBusy()) return;
+
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             entity.add(new ActionComponent(ActionComponent.Action.ATTACK));
             entity.add(new BusyComponent(2f));
@@ -22,34 +27,32 @@ public class InputSystem extends EngineSystem {
     }
 
     private void checkMovement(final Entity entity) {
-        float x, y = x = 0;
-
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            y -= 100f;
-            isMoving(entity, x, y, Direction.Pos.DOWN);
+            entity.add(new Velocity(0, -100));
+            entity.add(new Direction(Direction.Pos.DOWN));
+            entity.add(new ActionComponent(ActionComponent.Action.WALK));
             return;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            y += 100f;
-            isMoving(entity, x, y, Direction.Pos.UP);
+            entity.add(new Velocity(0, 100));
+            entity.add(new Direction(Direction.Pos.UP));
+            entity.add(new ActionComponent(ActionComponent.Action.WALK));
             return;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            x -= 100f;
-            isMoving(entity, x, y, Direction.Pos.LEFT);
+            entity.add(new Velocity(-100, 0));
+            entity.add(new Direction(Direction.Pos.LEFT));
+            entity.add(new ActionComponent(ActionComponent.Action.WALK));
             return;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            x += 100f;
-            isMoving(entity, x, y, Direction.Pos.RIGHT);
+            entity.add(new Velocity(100, 0));
+            entity.add(new Direction(Direction.Pos.RIGHT));
+            entity.add(new ActionComponent(ActionComponent.Action.WALK));
             return;
         }
 
-        entity.add(new Velocity(x, y));
-    }
-
-    private void isMoving(Entity entity, float x, float y, Direction.Pos pos) {
-        entity.add(new Velocity(x, y));
-        entity.add(new Direction(pos));
+        entity.add(new Velocity(0, 0));
+        entity.add(new ActionComponent(ActionComponent.Action.IDLE));
     }
 }

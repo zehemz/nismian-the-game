@@ -31,6 +31,7 @@ public class Game extends ApplicationAdapter {
         final CameraComponent cameraComponent = Mappers.camera.get(entity);
         engine.addEntity(entity);
 
+        engine.addSystem(new BusySystem());
         engine.addSystem(new InputSystem());
         engine.addSystem(new ActionSystem());
         engine.addSystem(new AnimationSystem());

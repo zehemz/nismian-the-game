@@ -11,13 +11,12 @@ public class MovementSystem extends EngineSystem {
     public void update(float deltaTime) {
         withComponents(Position.class, Velocity.class, BusyComponent.class)
                 .forEach(entity -> {
+
+                    BusyComponent busyComponent = Mappers.busy.get(entity);
+                    if (busyComponent.isBusy()) return;
+
                     Position position = Mappers.position.get(entity);
                     Velocity velocity = Mappers.velocity.get(entity);
-
-                    //TODO move to busy system.
-                    BusyComponent busyComponent = Mappers.busy.get(entity);
-                    busyComponent.update(deltaTime);
-                    if (busyComponent.isBusy()) return;
 
                     entity.remove(Position.class);
                     entity.add(new Position(position.x + velocity.x * deltaTime, position.y + velocity.y * deltaTime));
