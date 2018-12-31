@@ -8,7 +8,6 @@ import com.bahoga.nismian.components.Position;
 
 public class CameraSystem extends EngineSystem {
 
-
     private final CameraComponent cameraComponent;
 
     public CameraSystem(final CameraComponent cameraComponent) {
@@ -20,7 +19,7 @@ public class CameraSystem extends EngineSystem {
         withComponents(Player.class, Position.class)
                 .forEach(entity -> {
                     final Position position = Mappers.position.get(entity);
-                    final OrthographicCamera cam = cameraComponent.orthographicCamera;
+                    final OrthographicCamera cam = cameraComponent.cam;
                     cam.position.x = position.x;
                     cam.position.y = position.y;
                     cam.update();

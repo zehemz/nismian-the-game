@@ -16,7 +16,8 @@ public class MapRenderSystem extends EngineSystem {
                                         camera -> {
                                             MapComponent mapComponent = Mappers.map.get(map);
                                             CameraComponent cameraComponent = Mappers.camera.get(camera);
-                                            mapComponent.mapRenderer.setView(cameraComponent.orthographicCamera);
+                                            cameraComponent.cam.update();
+                                            mapComponent.mapRenderer.setView(cameraComponent.cam);
                                             mapComponent.mapRenderer.render();
                                         }));
     }

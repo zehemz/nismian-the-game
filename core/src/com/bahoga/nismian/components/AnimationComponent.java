@@ -1,6 +1,7 @@
 package com.bahoga.nismian.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -19,5 +20,6 @@ public class AnimationComponent extends Component {
     public Sprite getCurrent(final float delta) {
         stateTime += delta;
         return new Sprite(animation.getKeyFrame(stateTime, true));
+//        return new Sprite(new Texture("dildo.png"));q
     }
 }
