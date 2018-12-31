@@ -1,8 +1,6 @@
 package com.bahoga.nismian.systems;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 import com.bahoga.nismian.Constants;
 import com.bahoga.nismian.Mappers;
 import com.bahoga.nismian.components.CameraComponent;
@@ -29,8 +27,7 @@ public class SpriteRenderSystem extends EngineSystem {
                     final Position position = Mappers.position.get(entity);
 
                     gameSprite.sprite.setCenter(position.x, position.y);
-                    gameSprite.sprite.setSize(Constants.PLAYER_WIDTH,
-                            Constants.PLAYER_HEIGHT);
+                    gameSprite.sprite.setSize(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT);
                     gameSprite.sprite.draw(batch);
                 });
         batch.end();

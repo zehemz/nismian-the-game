@@ -11,7 +11,7 @@ public class Direction extends Component {
         RIGHT
     }
 
-    private final Pos pos;
+    public final Pos pos;
 
     public Direction(final Pos pos) {
         this.pos = pos;

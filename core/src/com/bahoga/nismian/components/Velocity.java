@@ -10,4 +10,8 @@ public class Velocity extends Component {
         this.x = x;
         this.y = y;
     }
+
+    public boolean isCero() {
+        return x == 0 && y == 0;
+    }
 }

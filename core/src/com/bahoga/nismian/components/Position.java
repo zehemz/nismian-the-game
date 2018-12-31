@@ -13,8 +13,7 @@ public class Position extends Component {
         this.y = y;
     }
 
-    public Position(Vector2 position)
-    {
+    public Position(final Vector2 position) {
         this.x = position.x;
         this.y = position.y;
     }

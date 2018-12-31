@@ -11,8 +11,7 @@ import com.bahoga.nismian.entities.EntityFactory.GameEntity;
 import com.bahoga.nismian.sceens.PlayScreen;
 import com.bahoga.nismian.systems.*;
 
-public class NismianGame extends Game
-{
+public class NismianGame extends Game {
     private Engine engine;
     private SpriteBatch batch;
     private PlayScreen screen;
@@ -31,7 +30,10 @@ public class NismianGame extends Game
         final CameraComponent cameraComponent = Mappers.camera.get(entity);
         engine.addEntity(entity);
 
+        engine.addSystem(new BusySystem());
         engine.addSystem(new InputSystem());
+        engine.addSystem(new ActionSystem());
+        engine.addSystem(new AnimationSystem());
         engine.addSystem(new MovementSystem());
         engine.addSystem(new CameraSystem(cameraComponent));
         engine.addSystem(new MapRenderSystem());
@@ -42,8 +44,7 @@ public class NismianGame extends Game
     }
 
     @Override
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
         Family family = Family.all(CameraComponent.class).get();
         engine.getEntitiesFor(family).forEach(entity -> {
             Mappers.camera.get(entity).setViewportSize(width, height);
@@ -51,8 +52,7 @@ public class NismianGame extends Game
     }
 
     @Override
-    public void dispose()
-    {
+    public void dispose() {
         batch.dispose();
     }
 }
