@@ -13,7 +13,7 @@ public class CameraComponent extends Component {
         cam = new OrthographicCamera(Constants.VISIBLE_VIEWPORT_WIDTH,
                 Constants.VISIBLE_VIEWPORT_HEIGHT * (height/width));
 
-        cam.zoom = 1f;
+        cam.zoom = 0.5f;
     }
 
     public void setViewportSize(float width, float height)

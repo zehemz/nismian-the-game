@@ -1,7 +1,6 @@
 package com.bahoga.nismian.entities;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -12,6 +11,8 @@ import com.bahoga.nismian.AnimationFactory;
 import com.bahoga.nismian.components.*;
 
 import java.util.ArrayList;
+
+import static com.bahoga.nismian.components.Dimension.DEFAULT_DIMENSION;
 
 public final class NPCFactory {
 
@@ -26,15 +27,17 @@ public final class NPCFactory {
         final MapObjects npcObjects = npcLayer.getObjects();
 
         for (final MapObject mapObject : npcObjects) {
+
             Rectangle rectangle = ((RectangleMapObject) mapObject).getRectangle();
             AnimationComponent skellByAction = AnimationFactory.getSkellByAction(ActionComponent.Action.IDLE);
 
             final Entity entity = new Entity();
             entity.add(new NPCComponent());
-            entity.add(new ColorComponent(new Color(1f, 0, 0, 1)));
+            entity.add(ColorComponent.YELLOW);
             entity.add(Position.with(rectangle));
-            entity.add(new Dimension(1, 1));
+            entity.add(DEFAULT_DIMENSION);
             entity.add(Velocity.STOP);
+            entity.add(new Direction(Direction.Pos.RIGHT));
             entity.add(new ActionComponent(ActionComponent.Action.IDLE));
             entity.add(BusyComponent.IDLE);
             entity.add(skellByAction);

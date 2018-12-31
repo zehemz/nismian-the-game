@@ -11,6 +11,7 @@ import com.bahoga.nismian.components.MapComponent;
 import com.bahoga.nismian.entities.EntityFactory;
 import com.bahoga.nismian.entities.EntityFactory.GameEntity;
 import com.bahoga.nismian.entities.NPCFactory;
+import com.bahoga.nismian.entities.WallFactory;
 import com.bahoga.nismian.maps.MapFactory;
 import com.bahoga.nismian.sceens.PlayScreen;
 import com.bahoga.nismian.systems.*;
@@ -31,11 +32,12 @@ public class NismianGame extends Game {
         final TiledMap tiledMap = MapFactory.create(MapFactory.GameMap.MAIN_MAP);
         Entity mapEntity = new Entity();
         mapEntity.add(new MapComponent(tiledMap));
-
-        Iterable<Entity> entities = NPCFactory.create(tiledMap);
-
         engine.addEntity(mapEntity);
-        entities.forEach(entity -> engine.addEntity(entity));
+
+        Iterable<Entity> npcs = NPCFactory.create(tiledMap);
+        Iterable<Entity> collisionWalls = WallFactory.create(tiledMap);
+        npcs.forEach(entity -> engine.addEntity(entity));
+        collisionWalls.forEach(entity -> engine.addEntity(entity));
 
         engine.addSystem(new BusySystem());
         engine.addSystem(new InputSystem());
