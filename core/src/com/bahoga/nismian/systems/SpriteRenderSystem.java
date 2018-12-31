@@ -26,8 +26,9 @@ public class SpriteRenderSystem extends EngineSystem {
                     final GameSprite gameSprite = Mappers.gameSprite.get(entity);
                     final Position position = Mappers.position.get(entity);
 
-                    gameSprite.sprite.setCenter(position.x, position.y);
                     gameSprite.sprite.setSize(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT);
+//                    gameSprite.sprite.setPosition(position.x - Constants.PLAYER_HEIGHT / 2, position.y - Constants.PLAYER_HEIGHT / 2);
+                    gameSprite.sprite.setCenter(position.x, position.y);
                     gameSprite.sprite.draw(batch);
                 });
         batch.end();
