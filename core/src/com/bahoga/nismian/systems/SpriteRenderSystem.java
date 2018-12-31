@@ -21,16 +21,21 @@ public class SpriteRenderSystem extends EngineSystem {
     public void update(float deltaTime) {
         batch.setProjectionMatrix(cameraComponent.cam.combined);
         batch.begin();
+
         withComponents(GameSprite.class, Position.class)
                 .forEach(entity -> {
                     final GameSprite gameSprite = Mappers.gameSprite.get(entity);
                     final Position position = Mappers.position.get(entity);
 
-                    gameSprite.sprite.setSize(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT);
-//                    gameSprite.sprite.setPosition(position.x - Constants.PLAYER_HEIGHT / 2, position.y - Constants.PLAYER_HEIGHT / 2);
-                    gameSprite.sprite.setCenter(position.x, position.y);
+                    gameSprite.sprite.setScale(1 / Constants.TILE_SIZE);
+//                    gameSprite.sprite.setCenter(position.x, position.y);
+//                    gameSprite.sprite.setPosition(Constants.fromPixelToWoldDimen(position.x), Constants.fromPixelToWoldDimen(position.y));
+                    gameSprite.sprite.setCenter(position.x +
+                            Constants.fromPixelToWoldDimen(gameSprite.sprite.getWidth() / 2f),
+                            position.y + Constants.fromPixelToWoldDimen(gameSprite.sprite.getHeight() / 2f));
                     gameSprite.sprite.draw(batch);
                 });
         batch.end();
+
     }
 }

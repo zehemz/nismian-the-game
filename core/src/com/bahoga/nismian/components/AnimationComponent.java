@@ -20,6 +20,5 @@ public class AnimationComponent extends Component {
     public Sprite getCurrent(final float delta) {
         stateTime += delta;
         return new Sprite(animation.getKeyFrame(stateTime, true));
-//        return new Sprite(new Texture("dildo.png"));q
     }
 }

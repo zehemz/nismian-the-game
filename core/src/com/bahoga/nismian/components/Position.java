@@ -2,6 +2,7 @@ package com.bahoga.nismian.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public class Position extends Component {
 
@@ -14,6 +15,11 @@ public class Position extends Component {
     }
 
     public Position(final Vector2 position) {
+        this.x = position.x;
+        this.y = position.y;
+    }
+
+    public Position(final Vector3 position) {
         this.x = position.x;
         this.y = position.y;
     }

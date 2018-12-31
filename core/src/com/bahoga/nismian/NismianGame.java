@@ -5,9 +5,13 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.bahoga.nismian.components.CameraComponent;
+import com.bahoga.nismian.components.MapComponent;
 import com.bahoga.nismian.entities.EntityFactory;
 import com.bahoga.nismian.entities.EntityFactory.GameEntity;
+import com.bahoga.nismian.entities.NPCFactory;
+import com.bahoga.nismian.maps.MapFactory;
 import com.bahoga.nismian.sceens.PlayScreen;
 import com.bahoga.nismian.systems.*;
 
@@ -20,15 +24,18 @@ public class NismianGame extends Game {
     public void create() {
 
         batch = new SpriteBatch();
-
         engine = new Engine();
 
-        engine.addEntity(EntityFactory.create(GameEntity.MAP));
-        engine.addEntity(EntityFactory.create(GameEntity.PLAYER));
+        final CameraComponent cameraComponent = createCamera();
 
-        Entity entity = EntityFactory.create(GameEntity.CAMERA);
-        final CameraComponent cameraComponent = Mappers.camera.get(entity);
-        engine.addEntity(entity);
+        final TiledMap tiledMap = MapFactory.create(MapFactory.GameMap.MAIN_MAP);
+        Entity mapEntity = new Entity();
+        mapEntity.add(new MapComponent(tiledMap));
+
+        Iterable<Entity> entities = NPCFactory.create(tiledMap, cameraComponent);
+
+        engine.addEntity(mapEntity);
+        entities.forEach(entity -> engine.addEntity(entity));
 
         engine.addSystem(new BusySystem());
         engine.addSystem(new InputSystem());
@@ -39,8 +46,21 @@ public class NismianGame extends Game {
         engine.addSystem(new MapRenderSystem());
         engine.addSystem(new SpriteRenderSystem(cameraComponent, batch));
 
+        engine.addEntity(EntityFactory.create(GameEntity.PLAYER));
+
+        addScreen();
+    }
+
+    private void addScreen() {
         screen = new PlayScreen(batch, engine);
         setScreen(screen);
+    }
+
+    private CameraComponent createCamera() {
+        final Entity camera = EntityFactory.create(GameEntity.CAMERA);
+        final CameraComponent cameraComponent = Mappers.camera.get(camera);
+        engine.addEntity(camera);
+        return cameraComponent;
     }
 
     @Override

@@ -16,8 +16,6 @@ public class EntityFactory {
     public enum GameEntity {
         PLAYER,
         CAMERA,
-        MAP,
-        NPC
     }
 
     public static Entity create(final GameEntity gameEntity) {
@@ -35,10 +33,6 @@ public class EntityFactory {
                 break;
             case CAMERA:
                 entity.add(new CameraComponent(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-                break;
-            case MAP:
-                final TiledMap tiledMap = MapFactory.create(MapFactory.GameMap.MAIN_MAP);
-                entity.add(new MapComponent(tiledMap));
                 break;
         }
         return entity;
