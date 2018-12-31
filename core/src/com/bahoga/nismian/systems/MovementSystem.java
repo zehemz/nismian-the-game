@@ -9,7 +9,9 @@ public class MovementSystem extends EngineSystem {
 
     @Override
     public void update(float delta) {
-        withComponents(Position.class, Velocity.class, BusyComponent.class)
+        withComponents(Position.class,
+                Velocity.class,
+                BusyComponent.class)
                 .forEach(entity -> {
 
                     BusyComponent busyComponent = Mappers.busy.get(entity);
@@ -17,9 +19,8 @@ public class MovementSystem extends EngineSystem {
 
                     Position position = Mappers.position.get(entity);
                     Velocity velocity = Mappers.velocity.get(entity);
-
                     entity.remove(Position.class);
-                    entity.add(new Position(position.x + velocity.x * delta, position.y + velocity.y * delta));
+                    entity.add(Position.with(position, velocity, delta));
                 });
     }
 }

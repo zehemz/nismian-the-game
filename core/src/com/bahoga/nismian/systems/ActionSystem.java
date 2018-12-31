@@ -11,8 +11,7 @@ public class ActionSystem extends EngineSystem {
 
     @Override
     public void update(float deltaTime) {
-        withComponents(ActionComponent.class,
-                AnimationComponent.class).forEach(entity -> {
+        withComponents(ActionComponent.class, AnimationComponent.class).forEach(entity -> {
             replaceAnimation(entity, Mappers.action.get(entity).action);
         });
     }

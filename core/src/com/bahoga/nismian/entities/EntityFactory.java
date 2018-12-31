@@ -3,13 +3,10 @@ package com.bahoga.nismian.entities;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.graphics.Color;
 import com.bahoga.nismian.AnimationFactory;
 import com.bahoga.nismian.Constants;
 import com.bahoga.nismian.components.*;
-import com.bahoga.nismian.maps.MapFactory;
-
-import static com.bahoga.nismian.components.Direction.Pos.DOWN;
 
 public class EntityFactory {
 
@@ -22,12 +19,12 @@ public class EntityFactory {
         final Entity entity = new Entity();
         switch (gameEntity) {
             case PLAYER:
-                entity.add(new Dimensions(1, 1));
-                entity.add(new Direction(DOWN));
-                entity.add(new Velocity(0, 0));
                 entity.add(new Player());
-                entity.add(new Position(Constants.PLAYER_SPAWN));
-                entity.add(new BusyComponent(0f));
+                entity.add(new Velocity(0, 0));
+                entity.add(new Dimension(1, 1));
+                entity.add(Position.with(Constants.PLAYER_SPAWN));
+                entity.add(BusyComponent.IDLE);
+                entity.add(new ColorComponent(new Color(0, 1f, 0, 1)));
                 entity.add(AnimationFactory.getSkellByAction(ActionComponent.Action.IDLE));
                 entity.add(new ActionComponent(ActionComponent.Action.IDLE));
                 break;

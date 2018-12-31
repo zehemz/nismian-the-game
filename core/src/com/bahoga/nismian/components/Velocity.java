@@ -1,17 +1,22 @@
 package com.bahoga.nismian.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.math.Vector2;
 
 public class Velocity extends Component {
-    public final float x;
-    public final float y;
+
+    public static final Velocity STOP = new Velocity(0, 0);
+
+    public static final float DEFAULT_SPEED = 4f;
+
+    private final Vector2 vector2;
 
     public Velocity(final float x, final float y) {
-        this.x = x;
-        this.y = y;
+        vector2 = new Vector2(x, y);
     }
 
-    public boolean isCero() {
-        return x == 0 && y == 0;
+    public Vector2 get() {
+        return vector2;
     }
+
 }

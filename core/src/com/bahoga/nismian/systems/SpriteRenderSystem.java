@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bahoga.nismian.Constants;
 import com.bahoga.nismian.Mappers;
 import com.bahoga.nismian.components.CameraComponent;
+import com.bahoga.nismian.components.ColorComponent;
 import com.bahoga.nismian.components.GameSprite;
 import com.bahoga.nismian.components.Position;
 
@@ -22,17 +23,15 @@ public class SpriteRenderSystem extends EngineSystem {
         batch.setProjectionMatrix(cameraComponent.cam.combined);
         batch.begin();
 
-        withComponents(GameSprite.class, Position.class)
+        withComponents(GameSprite.class, ColorComponent.class, Position.class)
                 .forEach(entity -> {
                     final GameSprite gameSprite = Mappers.gameSprite.get(entity);
                     final Position position = Mappers.position.get(entity);
-
-                    gameSprite.sprite.setScale(1 / Constants.TILE_SIZE);
-//                    gameSprite.sprite.setCenter(position.x, position.y);
-//                    gameSprite.sprite.setPosition(Constants.fromPixelToWoldDimen(position.x), Constants.fromPixelToWoldDimen(position.y));
-                    gameSprite.sprite.setCenter(position.x +
-                            Constants.fromPixelToWoldDimen(gameSprite.sprite.getWidth() / 2f),
-                            position.y + Constants.fromPixelToWoldDimen(gameSprite.sprite.getHeight() / 2f));
+                    final ColorComponent color = Mappers.color.get(entity);
+                    gameSprite.sprite.setColor(color.tint);
+                    gameSprite.sprite.setCenter(position.get().x +
+                                    Constants.fromPixelToWoldDimen(gameSprite.sprite.getWidth() / 2f),
+                            position.get().y + Constants.fromPixelToWoldDimen(gameSprite.sprite.getHeight() / 2f));
                     gameSprite.sprite.draw(batch);
                 });
         batch.end();

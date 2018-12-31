@@ -16,9 +16,9 @@ import com.bahoga.nismian.sceens.PlayScreen;
 import com.bahoga.nismian.systems.*;
 
 public class NismianGame extends Game {
+
     private Engine engine;
     private SpriteBatch batch;
-    private PlayScreen screen;
 
     @Override
     public void create() {
@@ -32,16 +32,21 @@ public class NismianGame extends Game {
         Entity mapEntity = new Entity();
         mapEntity.add(new MapComponent(tiledMap));
 
-        Iterable<Entity> entities = NPCFactory.create(tiledMap, cameraComponent);
+        Iterable<Entity> entities = NPCFactory.create(tiledMap);
 
         engine.addEntity(mapEntity);
         entities.forEach(entity -> engine.addEntity(entity));
 
         engine.addSystem(new BusySystem());
         engine.addSystem(new InputSystem());
+        engine.addSystem(new AiSystem());
         engine.addSystem(new ActionSystem());
         engine.addSystem(new AnimationSystem());
+        // This system applies movement to all units
         engine.addSystem(new MovementSystem());
+        // this system should be after movement system, cause this will correct the position and velocity
+        // if units overlaps.
+        engine.addSystem(new CollideSystem());
         engine.addSystem(new CameraSystem(cameraComponent));
         engine.addSystem(new MapRenderSystem());
         engine.addSystem(new SpriteRenderSystem(cameraComponent, batch));
@@ -52,7 +57,7 @@ public class NismianGame extends Game {
     }
 
     private void addScreen() {
-        screen = new PlayScreen(batch, engine);
+        PlayScreen screen = new PlayScreen(batch, engine);
         setScreen(screen);
     }
 

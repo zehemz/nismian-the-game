@@ -20,8 +20,8 @@ public class CameraSystem extends EngineSystem {
                 .forEach(entity -> {
                     final Position position = Mappers.position.get(entity);
                     final OrthographicCamera cam = cameraComponent.cam;
-                    cam.position.x = position.x;
-                    cam.position.y = position.y;
+                    cam.position.x = position.get().x;
+                    cam.position.y = position.get().y;
                     cam.update();
                 });
     }

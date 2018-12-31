@@ -10,5 +10,6 @@ public class GameSprite extends Component {
 
     public GameSprite(final Sprite sprite) {
         this.sprite = sprite;
+        this.sprite.setScale(1 / Constants.TILE_SIZE);
     }
 }
