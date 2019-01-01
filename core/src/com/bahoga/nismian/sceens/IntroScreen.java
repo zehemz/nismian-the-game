@@ -28,28 +28,33 @@ public class IntroScreen extends ScreenAdapter
 
     private Stage stage;
     private TextButton button;
-    private Label label;
+    private Label titleLabel;
+    private Label footerLabel;
 
     public IntroScreen(NismianGame game)
     {
         this.game = game;
         this.batch = game.batch;
 
-        viewport = new FitViewport(400, 320,
+        viewport = new FitViewport(1200, 900,
                 new OrthographicCamera());
         stage = new Stage(viewport, batch);
 
         Gdx.input.setInputProcessor(stage);
 
+        Skin skin = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
+        BitmapFont titleFont = skin.getFont("title");
+        BitmapFont textFont = skin.getFont("font");
+
         Table table = new Table();
+        //table.setDebug(true);
         table.top();
         table.setFillParent(true);
 
-        //Skin skin = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
-        Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        titleLabel = new Label("Nismian. The game.", new Label.LabelStyle(titleFont, Color.YELLOW));
+        table.add(titleLabel).center().padTop(80);
+        table.row();
 
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = new BitmapFont();
         button = new TextButton("Play", skin);
         button.addListener(new ChangeListener()
         {
@@ -64,10 +69,11 @@ public class IntroScreen extends ScreenAdapter
                 game.switchToPlayScreen();
             }
         });
-        table.add(button).expandX().padTop(10);
+        table.add(button).center().padTop(60);
+        table.row();
 
-        label = new Label("Soy una label", new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
-        table.add(label).expandX().padTop(10);
+        footerLabel = new Label("By Bahoga productions, your mom's favorite.", skin, "default");
+        table.add(footerLabel).expandY().bottom().padBottom(10);
 
         stage.addActor(table);
     }
@@ -85,7 +91,7 @@ public class IntroScreen extends ScreenAdapter
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.setProjectionMatrix(viewport.getCamera().combined);
-        //stage.act(delta);
+        stage.act();
         stage.draw();
     }
 

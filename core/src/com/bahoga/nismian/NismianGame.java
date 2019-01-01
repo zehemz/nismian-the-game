@@ -70,7 +70,6 @@ public class NismianGame extends Game {
     }
 
     private void addScreen() {
-        //currScreen = new PlayScreen(batch, engine);
         currScreen = new IntroScreen(this);
         setScreen(currScreen);
     }
