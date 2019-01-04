@@ -8,7 +8,6 @@ import com.bahoga.nismian.components.AnimationComponent;
 
 public class ActionSystem extends EngineSystem {
 
-
     @Override
     public void update(float deltaTime) {
         withComponents(ActionComponent.class, AnimationComponent.class).forEach(entity -> {
@@ -19,7 +18,7 @@ public class ActionSystem extends EngineSystem {
     private void replaceAnimation(Entity entity, ActionComponent.Action action) {
         final AnimationComponent animationComponent = Mappers.animation.get(entity);
         if (!animationComponent.action.equals(action)) {
-            entity.add(AnimationFactory.getSkellByAction(action));
+            entity.add(AnimationFactory.INSTANCE.getSkellByAction(action));
         }
     }
 }

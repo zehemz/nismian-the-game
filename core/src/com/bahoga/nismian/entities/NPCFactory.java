@@ -29,7 +29,7 @@ public final class NPCFactory {
         for (final MapObject mapObject : npcObjects) {
 
             Rectangle rectangle = ((RectangleMapObject) mapObject).getRectangle();
-            AnimationComponent skellByAction = AnimationFactory.getSkellByAction(ActionComponent.Action.IDLE);
+            AnimationComponent skellByAction = AnimationFactory.INSTANCE.getSkellByAction(ActionComponent.Action.IDLE);
 
             final Entity entity = new Entity();
             entity.add(new NPCComponent());

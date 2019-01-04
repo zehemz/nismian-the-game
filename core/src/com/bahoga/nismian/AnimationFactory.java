@@ -8,26 +8,36 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bahoga.nismian.components.ActionComponent;
 import com.bahoga.nismian.components.AnimationComponent;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 
-public final class AnimationFactory {
+public enum AnimationFactory {
+
+    INSTANCE;
+
     private static final float FRAME_DURATION = 0.10f;
     private static final int WALK_FRAME_COLS = 13;
     private static final int FRAME_ROWS = 1;
     private static final int IDLE_COLS = 11;
     private static final int ATTACK_COLS = 18;
 
+    private final Map<ActionComponent.Action, TextureRegion[]> frames;
 
-    private AnimationFactory() {
-
+    AnimationFactory() {
+        frames = new HashMap<>();
+        ActionComponent.Action.all().forEach(action -> {
+            frames.put(action, load(action));
+        });
     }
 
-    public static AnimationComponent getSkellByAction(ActionComponent.Action action) {
+    private TextureRegion[] load(ActionComponent.Action action) {
 
         Texture texture = new Texture(Gdx.files.internal(String.format(Locale.US, "sprites/npc/skelleton/%s.png",
                 action.name().toLowerCase()
         )));
+
 
         int cols;
 
@@ -61,6 +71,10 @@ public final class AnimationFactory {
             }
         }
 
-        return new AnimationComponent(new Animation(FRAME_DURATION, frames), action);
+        return frames;
+    }
+
+    public AnimationComponent getSkellByAction(ActionComponent.Action action) {
+        return new AnimationComponent(new Animation(FRAME_DURATION, frames.get(action)), action);
     }
 }
