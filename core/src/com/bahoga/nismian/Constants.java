@@ -13,7 +13,10 @@ public class Constants {
 
     public static final Vector2 PLAYER_SPAWN = new Vector2(0, 0); //en unidades del mundo
 
-    public static float fromPixelToWorldDimen(float pixels) {
-        return pixels / TILE_SIZE;
-    }
+    public static final String SKIN_URI = "skins/craftacular/craftacular-ui.json";
+    public static final String SKIN_TITLE_FONT = "title"; //sacado del json del skin
+    public static final String SKIN_TEXT_FONT = "font"; //sacado del json del skin
+
+    public static final float INTRO_VIEWPORT_WIDTH = 1200; //que se vea bien la UI
+    public static final float INTRO_VIEWPORT_HEIGHT = 900; //que se vea bien la UI
 }

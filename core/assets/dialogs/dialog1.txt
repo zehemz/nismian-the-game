@@ -1,0 +1,11 @@
+node 0
+Hola que tal.
+¿Qué vas a hacer?
+[Nada|1]
+[Dejame pensarlo|2]
+
+node 1
+Bueno, entonces rajá.
+
+node 2
+No tengo todo el día...

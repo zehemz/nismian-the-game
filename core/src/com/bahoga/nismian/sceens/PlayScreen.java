@@ -28,7 +28,7 @@ public class PlayScreen extends ScreenAdapter {
     public void render(float delta) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.Z))
         {
-            Family family = Family.all(CameraComponent.class).get();
+            final Family family = Family.all(CameraComponent.class).get();
             engine.getEntitiesFor(family).forEach(entity -> {
                 CameraComponent cameraComp = Mappers.camera.get(entity);
                 cameraComp.cam.zoom -= 0.2f;
@@ -36,7 +36,7 @@ public class PlayScreen extends ScreenAdapter {
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.X))
         {
-            Family family = Family.all(CameraComponent.class).get();
+            final Family family = Family.all(CameraComponent.class).get();
             engine.getEntitiesFor(family).forEach(entity -> {
                 CameraComponent cameraComp = Mappers.camera.get(entity);
                 cameraComp.cam.zoom += 0.2f;

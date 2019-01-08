@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.bahoga.nismian.Constants;
 import com.bahoga.nismian.NismianGame;
+import com.bahoga.nismian.dialog.DialogLoader;
 
 public class IntroScreen extends ScreenAdapter
 {
@@ -33,20 +34,27 @@ public class IntroScreen extends ScreenAdapter
 
     public IntroScreen(NismianGame game)
     {
+        DialogLoader.loadDialog("dialogs/dialog1.txt");
+
+
+
+
+
         this.game = game;
         this.batch = game.batch;
 
-        viewport = new FitViewport(1200, 900,
-                new OrthographicCamera());
+        viewport = new FitViewport(Constants.INTRO_VIEWPORT_WIDTH,
+                                    Constants.INTRO_VIEWPORT_HEIGHT,
+                                    new OrthographicCamera());
         stage = new Stage(viewport, batch);
 
         Gdx.input.setInputProcessor(stage);
 
-        Skin skin = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
-        BitmapFont titleFont = skin.getFont("title");
-        BitmapFont textFont = skin.getFont("font");
+        final Skin skin = new Skin(Gdx.files.internal(Constants.SKIN_URI));
+        final BitmapFont titleFont = skin.getFont(Constants.SKIN_TITLE_FONT);
+        final BitmapFont textFont = skin.getFont(Constants.SKIN_TEXT_FONT);
 
-        Table table = new Table();
+        final Table table = new Table();
         //table.setDebug(true);
         table.top();
         table.setFillParent(true);
