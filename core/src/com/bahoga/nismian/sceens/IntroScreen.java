@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.bahoga.nismian.Constants;
 import com.bahoga.nismian.NismianGame;
-import com.bahoga.nismian.dialog.DialogLoader;
+//import com.bahoga.nismian.dialog.DialogLoader;
 
 public class IntroScreen extends ScreenAdapter
 {
@@ -34,7 +34,7 @@ public class IntroScreen extends ScreenAdapter
 
     public IntroScreen(NismianGame game)
     {
-        DialogLoader.loadDialog("dialogs/dialog1.txt");
+//        DialogLoader.loadDialog("dialogs/dialog1.txt");
 
 
 
