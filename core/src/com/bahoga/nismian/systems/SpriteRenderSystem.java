@@ -29,8 +29,6 @@ public class SpriteRenderSystem extends EngineSystem {
                     final Position position = Mappers.position.get(entity);
                     final ColorComponent color = Mappers.color.get(entity);
                     gameSprite.sprite.setColor(color.tint);
-                    //gameSprite.sprite.setOrigin(0, 0);
-                    gameSprite.sprite.setScale(1/16f);
                     gameSprite.sprite.setPosition(position.get().x, position.get().y);
                     gameSprite.sprite.draw(batch);
                 });
