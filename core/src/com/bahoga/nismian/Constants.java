@@ -2,7 +2,11 @@ package com.bahoga.nismian;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Constants {
+public final class Constants {
+    private Constants()
+    {
+    }
+
     public static final float TILE_SIZE = 32f;
 
     public static final float WORLD_WIDTH = 100f; //en unidades del mundo
@@ -13,10 +17,7 @@ public class Constants {
 
     public static final Vector2 PLAYER_SPAWN = new Vector2(0, 0); //en unidades del mundo
 
-    public static final String SKIN_URI = "skins/craftacular/craftacular-ui.json";
-    public static final String SKIN_TITLE_FONT = "title"; //sacado del json del skin
-    public static final String SKIN_TEXT_FONT = "font"; //sacado del json del skin
-
     public static final float INTRO_VIEWPORT_WIDTH = 1200; //que se vea bien la UI
     public static final float INTRO_VIEWPORT_HEIGHT = 900; //que se vea bien la UI
+
 }

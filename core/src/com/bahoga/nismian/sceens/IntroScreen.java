@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.bahoga.nismian.Constants;
 import com.bahoga.nismian.NismianGame;
+import com.bahoga.nismian.UI;
 //import com.bahoga.nismian.dialog.DialogLoader;
 
 public class IntroScreen extends ScreenAdapter
@@ -50,9 +51,9 @@ public class IntroScreen extends ScreenAdapter
 
         Gdx.input.setInputProcessor(stage);
 
-        final Skin skin = new Skin(Gdx.files.internal(Constants.SKIN_URI));
-        final BitmapFont titleFont = skin.getFont(Constants.SKIN_TITLE_FONT);
-        final BitmapFont textFont = skin.getFont(Constants.SKIN_TEXT_FONT);
+        final Skin skin = new Skin(Gdx.files.internal(UI.SKIN_URI.value));
+        final BitmapFont titleFont = skin.getFont(UI.SKIN_TITLE_FONT.value);
+        final BitmapFont textFont = skin.getFont(UI.SKIN_TEXT_FONT.value);
 
         final Table table = new Table();
         //table.setDebug(true);
