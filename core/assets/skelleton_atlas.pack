@@ -1,0 +1,47 @@
+
+skelleton_atlas.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+attack
+  rotate: false
+  xy: 1, 70
+  size: 774, 37
+  orig: 774, 37
+  offset: 0, 0
+  index: -1
+dead
+  rotate: false
+  xy: 1, 36
+  size: 495, 32
+  orig: 495, 32
+  offset: 0, 0
+  index: -1
+walk
+  rotate: false
+  xy: 1, 1
+  size: 286, 33
+  orig: 286, 33
+  offset: 0, 0
+  index: -1
+idle
+  rotate: false
+  xy: 498, 36
+  size: 264, 32
+  orig: 264, 32
+  offset: 0, 0
+  index: -1
+hit
+  rotate: false
+  xy: 777, 75
+  size: 240, 32
+  orig: 240, 32
+  offset: 0, 0
+  index: -1
+react
+  rotate: false
+  xy: 289, 2
+  size: 88, 32
+  orig: 88, 32
+  offset: 0, 0
+  index: -1
