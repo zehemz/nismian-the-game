@@ -29,22 +29,30 @@ public class InputSystem extends EngineSystem {
 
     private void checkMovement(final Entity entity) {
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            entity.add(new Velocity(0, -Velocity.DEFAULT_SPEED));
+            Velocity velocity = new Velocity(0, -Velocity.DEFAULT_SPEED);
+            entity.add(velocity);
+            entity.add(Direction.with(velocity));
             entity.add(new ActionComponent(ActionComponent.Action.WALK));
             return;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            entity.add(new Velocity(0, Velocity.DEFAULT_SPEED));
+            Velocity velocity = new Velocity(0, Velocity.DEFAULT_SPEED);
+            entity.add(velocity);
+            entity.add(Direction.with(velocity));
             entity.add(new ActionComponent(ActionComponent.Action.WALK));
             return;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            entity.add(new Velocity(-Velocity.DEFAULT_SPEED, 0));
+            Velocity velocity = new Velocity(-Velocity.DEFAULT_SPEED, 0);
+            entity.add(velocity);
+            entity.add(Direction.with(velocity));
             entity.add(new ActionComponent(ActionComponent.Action.WALK));
             return;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            entity.add(new Velocity(Velocity.DEFAULT_SPEED, 0));
+            Velocity velocity = new Velocity(Velocity.DEFAULT_SPEED, 0);
+            entity.add(velocity);
+            entity.add(Direction.with(velocity));
             entity.add(new ActionComponent(ActionComponent.Action.WALK));
             return;
         }

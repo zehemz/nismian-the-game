@@ -2,6 +2,7 @@ package com.bahoga.nismian.systems;
 
 import com.bahoga.nismian.Mappers;
 import com.bahoga.nismian.components.ActionComponent;
+import com.bahoga.nismian.components.Direction;
 import com.bahoga.nismian.components.NPCComponent;
 import com.bahoga.nismian.components.Velocity;
 
@@ -23,8 +24,9 @@ public class AiSystem extends EngineSystem {
                     entity.add(aiRandomVelocity);
                 } else {
                     final Velocity aiRandomVelocity = getAIRandomVelocity();
-                    entity.add(new ActionComponent(ActionComponent.Action.WALK));
                     entity.add(aiRandomVelocity);
+                    entity.add(Direction.with(aiRandomVelocity));
+                    entity.add(new ActionComponent(ActionComponent.Action.WALK));
                 }
             }
         });

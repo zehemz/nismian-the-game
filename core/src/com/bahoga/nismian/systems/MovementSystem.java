@@ -2,6 +2,7 @@ package com.bahoga.nismian.systems;
 
 import com.bahoga.nismian.Mappers;
 import com.bahoga.nismian.components.BusyComponent;
+import com.bahoga.nismian.components.Direction;
 import com.bahoga.nismian.components.Position;
 import com.bahoga.nismian.components.Velocity;
 

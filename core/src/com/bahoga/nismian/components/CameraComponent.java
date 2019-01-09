@@ -6,19 +6,20 @@ import com.bahoga.nismian.Constants;
 
 public class CameraComponent extends Component {
 
+    private static final float ZOOM = 0.5f;
+
     public final OrthographicCamera cam;
 
     public CameraComponent(float width, float height) {
 
         cam = new OrthographicCamera(Constants.VISIBLE_VIEWPORT_WIDTH,
-                Constants.VISIBLE_VIEWPORT_HEIGHT * (height/width));
+                Constants.VISIBLE_VIEWPORT_HEIGHT * (height / width));
 
-        cam.zoom = 1f;
+        cam.zoom = ZOOM;
     }
 
-    public void setViewportSize(float width, float height)
-    {
-        cam.viewportHeight = Constants.VISIBLE_VIEWPORT_HEIGHT * (height/width);
+    public void setViewportSize(float width, float height) {
+        cam.viewportHeight = Constants.VISIBLE_VIEWPORT_HEIGHT * (height / width);
         cam.update();
     }
 }
