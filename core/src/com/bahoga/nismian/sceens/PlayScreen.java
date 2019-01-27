@@ -9,14 +9,26 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bahoga.nismian.Mappers;
 import com.bahoga.nismian.components.CameraComponent;
+import com.bahoga.nismian.dialog.Dialog;
+import com.bahoga.nismian.dialog.DialogLoader;
+import com.bahoga.nismian.dialog.DialogStage;
 
 public class PlayScreen extends ScreenAdapter {
     private final SpriteBatch batch;
     private final Engine engine;
 
+    private final DialogStage dialogStage;
+
     public PlayScreen(final SpriteBatch batch, final Engine engine) {
         this.batch = batch;
         this.engine = engine;
+
+        dialogStage = new DialogStage();
+        Gdx.input.setInputProcessor(dialogStage);
+
+        //el dialog se carga y corre según eventos, esto es solo para probar
+        dialogStage.setDialog(DialogLoader.loadDialog("dialogs/dialog1.txt"));
+        dialogStage.runDialog();
     }
 
     @Override
@@ -46,6 +58,8 @@ public class PlayScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         engine.update(delta);
+
+        dialogStage.draw();
     }
 
     @Override
@@ -53,4 +67,10 @@ public class PlayScreen extends ScreenAdapter {
         super.resize(width, height);
     }
 
+    @Override
+    public void dispose()
+    {
+        if(dialogStage != null)
+            dialogStage.dispose();
+    }
 }

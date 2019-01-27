@@ -11,9 +11,13 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-public class DialogLoader
+public final class DialogLoader
 {
-    static public Dialog loadDialog(String fileName)
+    private DialogLoader()
+    {
+    }
+
+    static public Dialog loadDialog(final String fileName)
     {
         //cargar el archivo e ir poblando el dialogo con nodos
         Dialog dialogo = new Dialog();
@@ -52,7 +56,7 @@ public class DialogLoader
                         }
                         else if(textPattern.matcher(line).find()) //texto de diálogo
                         {
-                            textBuilder.append(line);
+                            textBuilder.append(line.substring(1));
                             textBuilder.append("\n");
                         }
                         else if(responsePattern.matcher(line).find()) //respuesta

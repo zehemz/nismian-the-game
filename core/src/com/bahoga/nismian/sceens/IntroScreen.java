@@ -10,14 +10,21 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.bahoga.nismian.Constants;
 import com.bahoga.nismian.NismianGame;
 import com.bahoga.nismian.UI;
-//import com.bahoga.nismian.dialog.DialogLoader;
+import com.bahoga.nismian.dialog.Dialog;
+import com.bahoga.nismian.dialog.DialogLoader;
+import com.bahoga.nismian.dialog.DialogStage;
+
+import java.util.Scanner;
 
 public class IntroScreen extends ScreenAdapter
 {
@@ -35,12 +42,6 @@ public class IntroScreen extends ScreenAdapter
 
     public IntroScreen(NismianGame game)
     {
-//        DialogLoader.loadDialog("dialogs/dialog1.txt");
-
-
-
-
-
         this.game = game;
         this.batch = game.batch;
 
@@ -110,4 +111,9 @@ public class IntroScreen extends ScreenAdapter
         super.resize(width, height);
     }
 
+    @Override
+    public void dispose()
+    {
+        stage.dispose();
+    }
 }

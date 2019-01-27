@@ -6,7 +6,8 @@ public class DialogNode
     private final String[] responses;
     private final String[] nextNodesKeys;
 
-    public DialogNode(String text, String[] responses, String[] nextNodesKeys) throws Exception
+    public DialogNode(final String text, final String[] responses,
+                      final String[] nextNodesKeys) throws Exception
     {
         this.text = text;
         this.responses = responses;

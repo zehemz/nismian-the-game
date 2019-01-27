@@ -1,12 +1,18 @@
 node 0
 :Hola que tal.
-:¿Qué vas a hacer?
+:Bienvenido a sarasa.
+:¿Que vas a hacer?
 [Nada|1]
 [Dejame pensarlo|2]
+[Tirate un paso|3]
+[Romper todo|1]
 ===
 node 1
-:Bueno, entonces rajá.
+:Bueno, entonces raja.
 ===
 node 2
-:No tengo todo el día...
+:No tengo todo el dia...
+===
+node 3
+:Ah, sos gracioso...
 ===

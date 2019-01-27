@@ -38,8 +38,19 @@ public class Dialog
         return null;
     }
 
-    public void responde(int index)
+    public String respond(final int index)
     {
-        currentNode = nodes.get(currentNode.getNextNodesKeys()[index]);
+        if(index < currentNode.getResponses().length)
+        {
+            currentNode = nodes.get(currentNode.getNextNodesKeys()[index]);
+            return currentNode.getText();
+        }
+
+        return "That response is not available.";
+    }
+
+    public boolean hasNext()
+    {
+        return currentNode.getNextNodesKeys().length > 0;
     }
 }
