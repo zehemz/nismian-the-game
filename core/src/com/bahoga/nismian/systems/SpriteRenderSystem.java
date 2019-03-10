@@ -28,9 +28,6 @@ public class SpriteRenderSystem extends EngineSystem {
                     final Direction direction = Mappers.direction.get(entity);
                     final ColorComponent color = Mappers.color.get(entity);
 
-
-                    gameSprite.sprite.setCenter(position.get().x + Dimension.fromPixelToWoldDimen(gameSprite.sprite.getWidth() / 2f),
-                            position.get().y + Dimension.fromPixelToWoldDimen(gameSprite.sprite.getHeight() / 2f));
                     //TODO remove - hack animations
                     if (direction.pos == Direction.Pos.LEFT) {
                         gameSprite.sprite.flip(true, false);
@@ -39,6 +36,7 @@ public class SpriteRenderSystem extends EngineSystem {
                     }
 
                     gameSprite.sprite.setColor(color.tint);
+                    gameSprite.sprite.setPosition(position.get().x, position.get().y);
 
                     gameSprite.sprite.draw(batch);
                 });

@@ -4,7 +4,9 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.bahoga.nismian.components.CameraComponent;
 import com.bahoga.nismian.components.MapComponent;
@@ -13,13 +15,17 @@ import com.bahoga.nismian.entities.EntityFactory.GameEntity;
 import com.bahoga.nismian.entities.NPCFactory;
 import com.bahoga.nismian.entities.WallFactory;
 import com.bahoga.nismian.maps.MapFactory;
+import com.bahoga.nismian.sceens.IntroScreen;
 import com.bahoga.nismian.sceens.PlayScreen;
 import com.bahoga.nismian.systems.*;
 
 public class NismianGame extends Game {
 
     private Engine engine;
-    private SpriteBatch batch;
+    public SpriteBatch batch;
+
+    private ScreenAdapter currScreen;
+    private static TextureAtlas atlas;
 
     @Override
     public void create() {
@@ -28,6 +34,8 @@ public class NismianGame extends Game {
         engine = new Engine();
 
         final CameraComponent cameraComponent = createCamera();
+
+        atlas = new TextureAtlas("skelleton_atlas.pack");
 
         final TiledMap tiledMap = MapFactory.create(MapFactory.GameMap.MAIN_MAP);
         Entity mapEntity = new Entity();
@@ -58,9 +66,20 @@ public class NismianGame extends Game {
         addScreen();
     }
 
+    public static TextureAtlas getAtlas()
+    {
+        return atlas;
+    }
+
     private void addScreen() {
-        PlayScreen screen = new PlayScreen(batch, engine);
-        setScreen(screen);
+        currScreen = new IntroScreen(this);
+        setScreen(currScreen);
+    }
+
+    public void switchToPlayScreen()
+    {
+        currScreen = new PlayScreen(batch, engine);
+        setScreen(currScreen);
     }
 
     private CameraComponent createCamera() {
@@ -68,6 +87,11 @@ public class NismianGame extends Game {
         final CameraComponent cameraComponent = Mappers.camera.get(camera);
         engine.addEntity(camera);
         return cameraComponent;
+    }
+
+    public ScreenAdapter getCurrScreen()
+    {
+        return currScreen;
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.bahoga.nismian.components;
 
 import com.badlogic.ashley.core.Component;
 
+import java.util.Arrays;
+
 public class ActionComponent extends Component {
 
     public final Action action;
@@ -9,7 +11,11 @@ public class ActionComponent extends Component {
     public enum Action {
         IDLE,
         ATTACK,
-        WALK
+        WALK;
+
+        public static Iterable<Action> all() {
+            return Arrays.asList(IDLE, ATTACK, WALK);
+        }
     }
 
     public ActionComponent(final Action action) {

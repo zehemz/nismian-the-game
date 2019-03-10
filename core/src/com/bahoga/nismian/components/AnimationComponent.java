@@ -3,11 +3,12 @@ package com.bahoga.nismian.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AnimationComponent extends Component {
 
     private float stateTime;
-    private Animation animation;
+    private Animation<TextureRegion> animation;
     public ActionComponent.Action action;
 
 

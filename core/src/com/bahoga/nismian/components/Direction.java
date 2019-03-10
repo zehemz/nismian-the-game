@@ -1,24 +1,24 @@
 package com.bahoga.nismian.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Vector2;
 
 public class Direction extends Component {
 
     public static Direction with(Velocity velocity) {
-        Vector2 vector2 = velocity.get();
-        float angle = vector2.angle();
+        float x = velocity.get().x;
+        float y = velocity.get().y;
 
         //TODO refactor using enum
-        if (angle == 90f) {
+        if (y > 0) {
             return new Direction(Pos.UP);
-        } else if (angle == 0f) {
+        } else if (x > 0) {
             return new Direction(Pos.RIGHT);
-        } else if (angle == 180f) {
+        } else if (x < 0) {
             return new Direction(Pos.LEFT);
         } else {
             return new Direction(Pos.DOWN);
         }
+
     }
 
     public enum Pos {

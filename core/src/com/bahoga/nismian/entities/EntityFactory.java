@@ -26,7 +26,7 @@ public class EntityFactory {
                 entity.add(new Direction(Direction.Pos.RIGHT));
                 entity.add(Position.with(Constants.PLAYER_SPAWN));
                 entity.add(ColorComponent.GREEN);
-                entity.add(AnimationFactory.getSkellByAction(ActionComponent.Action.IDLE));
+                entity.add(AnimationFactory.INSTANCE.getSkellByAction(ActionComponent.Action.IDLE));
                 entity.add(new ActionComponent(ActionComponent.Action.IDLE));
                 entity.add(BusyComponent.IDLE);
                 break;

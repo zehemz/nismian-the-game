@@ -9,7 +9,8 @@ import com.bahoga.nismian.components.*;
 public class InputSystem extends EngineSystem {
 
     @Override
-    public void update(float deltaTime) {
+    public void update(float deltaTime)
+    {
         withComponents(Player.class).forEach(this::checkActions);
     }
 
